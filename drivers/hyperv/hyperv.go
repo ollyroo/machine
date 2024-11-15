@@ -267,6 +267,12 @@ func (d *Driver) Create() error {
 		return err
 	}
 
+	if err := cmd("Hyper-V\\Set-VMFirmware",
+		"-VMName", d.MachineName,
+		"-EnableSecureBoot Off"); err != nil {
+		return err
+	}
+
 	log.Infof("Starting VM...")
 	return d.Start()
 }
